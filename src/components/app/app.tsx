@@ -52,7 +52,6 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
@@ -60,18 +59,21 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <Modal title='' onClose={handleModalClose}>
+            <div className={styles.detailPageWrap}>
               <OrderInfo />
-            </Modal>
+            </div>
           }
         />
 
         <Route
           path='/ingredients/:id'
           element={
-            <Modal title='Детали ингредиента' onClose={handleModalClose}>
+            <div className={styles.detailPageWrap}>
+              <p className={`text text_type_main-large ${styles.detailHeader}`}>
+                Детали ингредиента
+              </p>
               <IngredientDetails />
-            </Modal>
+            </div>
           }
         />
 
@@ -88,16 +90,22 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title='' onClose={handleModalClose}>
+              <div className={styles.detailPageWrap}>
                 <OrderInfo />
-              </Modal>
+              </div>
             }
           />
         </Route>
 
-        <Route path='*' element={<NotFound404 />} />
+        <Route
+          path='*'
+          element={
+            <div className={styles.detailPageWrap}>
+              <NotFound404 />
+            </div>
+          }
+        />
       </Routes>
-
       {background && (
         <Routes>
           <Route
